@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
+import { AppSplash } from '@/components/shared/AppSplash';
 import { useAuth } from './contexts/AuthContext';
 import { AppLayout } from './layouts/AppLayout';
 import { ConnectionsPage } from './pages/Connections/ConnectionsPage';
@@ -11,13 +12,7 @@ import { SettingsPage } from './pages/Settings/SettingsPage';
 
 function Protected({ children }: { children: ReactNode }) {
   const { user, loading } = useAuth();
-  if (loading) {
-    return (
-      <div className="flex min-h-screen items-center justify-center text-sm text-zinc-500">
-        Loading…
-      </div>
-    );
-  }
+  if (loading) return <AppSplash />;
   if (!user) return <Navigate to="/login" replace />;
   return <>{children}</>;
 }
@@ -30,7 +25,13 @@ export default function App() {
       <Route
         path="/login"
         element={
-          loading ? null : user ? <Navigate to="/dashboard" replace /> : <LoginPage />
+          loading ? (
+            <AppSplash />
+          ) : user ? (
+            <Navigate to="/dashboard" replace />
+          ) : (
+            <LoginPage />
+          )
         }
       />
       <Route

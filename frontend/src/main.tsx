@@ -2,14 +2,14 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-import { Toaster } from 'sonner';
 import App from './App';
+import { Toaster } from '@/components/ui/sonner';
+import { TooltipProvider } from '@/components/ui/tooltip';
 import { AuthProvider } from './contexts/AuthContext';
+import { initTheme, ThemeProvider } from './contexts/ThemeContext';
 import './index.css';
 
-if (localStorage.getItem('ai-coo-theme') === 'dark') {
-  document.documentElement.classList.add('dark');
-}
+initTheme();
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -24,12 +24,16 @@ const queryClient = new QueryClient({
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <AuthProvider>
-          <App />
-          <Toaster richColors position="top-right" />
-        </AuthProvider>
-      </BrowserRouter>
+      <ThemeProvider>
+        <BrowserRouter>
+          <AuthProvider>
+            <TooltipProvider delayDuration={200}>
+              <App />
+              <Toaster richColors position="top-right" />
+            </TooltipProvider>
+          </AuthProvider>
+        </BrowserRouter>
+      </ThemeProvider>
     </QueryClientProvider>
   </StrictMode>,
 );
