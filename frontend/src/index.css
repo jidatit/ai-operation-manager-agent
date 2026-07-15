@@ -1,0 +1,16 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  color-scheme: light dark;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  @apply bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100 min-h-screen;
+}
+
+#root {
+  min-height: 100vh;
+}

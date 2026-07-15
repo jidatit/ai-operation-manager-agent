@@ -1,0 +1,80 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum ReportType {
+  MORNING
+  EVENING
+}
+
+enum OAuthProvider {
+  GOOGLE
+  SLACK
+  ASANA
+}
+
+model User {
+  id            String         @id @default(cuid())
+  name          String
+  email         String         @unique
+  avatar        String?
+  timezone      String         @default("UTC")
+  createdAt     DateTime       @default(now())
+  oauthAccounts OAuthAccount[]
+  dailyReports  DailyReport[]
+  settings      UserSettings?
+}
+
+model UserSettings {
+  id             String  @id @default(cuid())
+  userId         String  @unique
+  user           User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  emailReports   Boolean @default(true)
+  slackReports   Boolean @default(true)
+  slackChannelId String?
+}
+
+model OAuthAccount {
+  id           String        @id @default(cuid())
+  userId       String
+  provider     OAuthProvider
+  accessToken  String
+  refreshToken String?
+  expiresAt    DateTime?
+  scopes       String?
+  metadata     Json?
+  lastSyncAt   DateTime?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, provider])
+}
+
+model DailyReport {
+  id        String     @id @default(cuid())
+  userId    String
+  type      ReportType
+  content   String     @db.Text
+  rawData   Json?
+  createdAt DateTime   @default(now())
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+}
+
+model ReportRunLog {
+  id     String     @id @default(cuid())
+  userId String
+  type   ReportType
+  ranAt  DateTime   @default(now())
+  ranOn  String
+
+  @@unique([userId, type, ranOn])
+  @@index([userId, type])
+}
