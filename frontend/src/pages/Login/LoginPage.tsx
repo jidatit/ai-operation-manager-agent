@@ -4,11 +4,14 @@ import {
   CalendarDays,
   FileText,
   LayoutDashboard,
+  Mail,
   ShieldCheck,
 } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
+import { useTheme } from '@/contexts/ThemeContext';
+import { cn } from '@/lib/utils';
 
 function GoogleMark() {
   return (
@@ -49,12 +52,23 @@ const FEATURES = [
     title: 'Slack & Asana in one view',
     description: 'Tasks, mentions, and ops signals in a single dashboard.',
   },
+  {
+    icon: Mail,
+    title: 'Daily email & Slack reports',
+    description: 'Get morning and evening briefs delivered to your inbox and Slack.',
+  },
 ] as const;
 
 export function LoginPage() {
   const { loginWithGoogle } = useAuth();
+  const { resolvedTheme } = useTheme();
   const [params] = useSearchParams();
   const error = params.get('error');
+  const isDark = resolvedTheme === 'dark';
+
+  const brandGradient = isDark
+    ? 'radial-gradient(ellipse 80% 70% at 70% 40%, #FF9736 0%, #FF7A00 45%, #C45A00 85%, #1a0f08 100%)'
+    : 'radial-gradient(ellipse 80% 70% at 70% 40%, #FF9736 0%, #FF7A00 45%, #FFBC7D 85%, #FFF5EB 100%)';
 
   return (
     <div className="flex min-h-screen flex-col lg:flex-row">
@@ -115,10 +129,7 @@ export function LoginPage() {
       {/* Right: brand panel */}
       <aside
         className="relative flex flex-1 flex-col justify-between overflow-hidden px-6 py-10 text-white sm:px-10 lg:px-14 lg:py-12"
-        style={{
-          background:
-            'radial-gradient(ellipse 80% 70% at 70% 40%, #FF9736 0%, #FF7A00 45%, #C45A00 85%, #1a0f08 100%)',
-        }}
+        style={{ background: brandGradient }}
       >
         <div
           className="pointer-events-none absolute inset-0 opacity-30"
@@ -137,7 +148,7 @@ export function LoginPage() {
             Your AI operations command center
           </h2>
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/85">
-            One dashboard for the signals that matter—so you know what happened,
+            One dashboard for the signals that matter, so you know what happened,
             what needs attention, and what to do next.
           </p>
         </div>
@@ -158,13 +169,20 @@ export function LoginPage() {
           ))}
         </ul>
 
-        <div className="relative z-10 mt-10 flex items-start gap-2 rounded-xl border border-white/20 bg-white/10 p-4 backdrop-blur-sm lg:mt-0">
+        <div
+          className={cn(
+            'relative z-10 mt-10 flex items-start gap-2 rounded-xl p-4 backdrop-blur-sm lg:mt-0',
+            isDark
+              ? 'border border-white/20 bg-black/30'
+              : 'border border-white/50 bg-white/30',
+          )}
+        >
           <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-[#FFBC7D]" aria-hidden />
           <p className="text-xs leading-relaxed text-white/90">
             <span className="font-medium text-white">
               Google powers secure sign-in and Gmail/Calendar context.
             </span>{' '}
-            We only use access you grant—Slack and Asana connect separately after
+            We only use access you grant. Slack and Asana connect separately after
             login.
           </p>
         </div>
