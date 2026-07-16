@@ -66,9 +66,10 @@ export function LoginPage() {
   const error = params.get('error');
   const isDark = resolvedTheme === 'dark';
 
+  // Light mode: warm peach edges (not near-white) so corners stay soft, not blown out
   const brandGradient = isDark
     ? 'radial-gradient(ellipse 80% 70% at 70% 40%, #FF9736 0%, #FF7A00 45%, #C45A00 85%, #1a0f08 100%)'
-    : 'radial-gradient(ellipse 80% 70% at 70% 40%, #FF9736 0%, #FF7A00 45%, #FFBC7D 85%, #FFF5EB 100%)';
+    : 'radial-gradient(ellipse 80% 70% at 70% 40%, #FF9736 0%, #FF7A00 50%, #F08A2A 80%, #E07018 100%)';
 
   return (
     <div className="flex min-h-screen flex-col lg:flex-row">
@@ -132,10 +133,13 @@ export function LoginPage() {
         style={{ background: brandGradient }}
       >
         <div
-          className="pointer-events-none absolute inset-0 opacity-30"
+          className={cn(
+            'pointer-events-none absolute inset-0',
+            isDark ? 'opacity-30' : 'opacity-15',
+          )}
           style={{
             background:
-              'radial-gradient(circle at 20% 80%, #FFBC7D 0%, transparent 50%)',
+              'radial-gradient(circle at 20% 80%, #FFBC7D 0%, transparent 45%)',
           }}
           aria-hidden
         />
