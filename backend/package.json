@@ -5,8 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "build": "tsc",
-    "render:build": "npm install --include=dev && npx prisma generate && npm run build",
+    "build": "prisma generate && tsc",
     "start": "node dist/server.js",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
@@ -16,6 +15,13 @@
   "dependencies": {
     "@prisma/client": "^6.10.1",
     "@slack/web-api": "^7.9.3",
+    "@types/cookie-parser": "^1.4.9",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^4.17.23",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/luxon": "^3.6.2",
+    "@types/node": "^22.15.32",
+    "@types/node-cron": "^3.0.11",
     "asana": "^3.1.1",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
@@ -29,19 +35,12 @@
     "node-cron": "^4.1.0",
     "pino": "^9.7.0",
     "pino-pretty": "^13.0.0",
+    "prisma": "^6.10.1",
     "resend": "^4.5.2",
+    "typescript": "^5.8.3",
     "zod": "^3.25.67"
   },
   "devDependencies": {
-    "@types/cookie-parser": "^1.4.9",
-    "@types/cors": "^2.8.19",
-    "@types/express": "^4.17.23",
-    "@types/jsonwebtoken": "^9.0.10",
-    "@types/luxon": "^3.6.2",
-    "@types/node": "^22.15.32",
-    "@types/node-cron": "^3.0.11",
-    "prisma": "^6.10.1",
-    "tsx": "^4.20.3",
-    "typescript": "^5.8.3"
+    "tsx": "^4.20.3"
   }
 }
