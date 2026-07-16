@@ -91,7 +91,7 @@ export function LoginPage() {
           </h1>
           <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
             AI COO turns Gmail, Calendar, Slack, and Asana into a daily executive
-            brief—priorities, meetings, and recommended actions.
+            brief priorities, meetings, and recommended actions.
           </p>
           <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
             Sign in with Google so we can securely access your workspace identity
