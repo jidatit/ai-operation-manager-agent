@@ -37,7 +37,7 @@ export function ProviderLogo({
   return (
     <div
       className={cn(
-        'flex shrink-0 items-center justify-center rounded-xl border border-border/60 bg-white shadow-sm dark:bg-white',
+        'flex shrink-0 items-center justify-center rounded-xl bg-white ring-1 ring-border/50 dark:bg-white',
         sizeClasses[size],
         className,
       )}
@@ -45,7 +45,10 @@ export function ProviderLogo({
       <img
         src={PROVIDER_LOGOS[provider]}
         alt={PROVIDER_NAMES[provider]}
-        className={cn('object-contain', provider === 'ASANA' ? 'h-5 w-auto max-w-full' : imgClasses[size])}
+        className={cn(
+          'object-contain',
+          provider === 'ASANA' ? 'h-5 w-auto max-w-full' : imgClasses[size],
+        )}
       />
     </div>
   );

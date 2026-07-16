@@ -31,7 +31,12 @@ export function DashboardPage() {
       void qc.invalidateQueries({ queryKey: ['reports'] });
       void qc.invalidateQueries({ queryKey: ['report'] });
     },
-    onError: () => toast.error('Failed to generate report'),
+    onError: (err: unknown) => {
+      const message =
+        (err as { response?: { data?: { error?: string } } })?.response?.data
+          ?.error ?? 'Failed to generate report';
+      toast.error(message);
+    },
   });
 
   if (brief.isLoading) return <DashboardSkeleton />;

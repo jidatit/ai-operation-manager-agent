@@ -33,7 +33,7 @@ const envSchema = z.object({
     .string()
     .default('http://localhost:3001/connections/asana/callback'),
   OPENROUTER_API_KEY: z.string().optional().default(''),
-  OPENROUTER_MODEL: z.string().default('anthropic/claude-sonnet-4.5'),
+  OPENROUTER_MODEL: z.string().default('openai/gpt-4o-mini'),
   OPENROUTER_TEMPERATURE: z.coerce.number().default(0.3),
   OPENROUTER_MAX_TOKENS: z.coerce.number().default(2000),
   RESEND_API_KEY: z.string().optional().default(''),

@@ -95,7 +95,7 @@ export function IntegrationCard({
             ))}
             {connection.provider === 'GOOGLE' ? (
               <li className="flex items-center gap-2 text-xs text-muted-foreground">
-                <Calendar className="h-3.5 w-3.5 text-success" />
+                <Calendar className="h-3.5 w-3.5 text-primary" />
                 Calendar access
               </li>
             ) : null}

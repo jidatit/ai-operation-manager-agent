@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Bell, LogOut, Menu, Search, Settings } from 'lucide-react';
+import { LogOut, Menu, Search, Settings } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
@@ -11,13 +11,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { Separator } from '@/components/ui/separator';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/components/ui/tooltip';
 import { Sidebar, PAGE_TITLES } from '@/components/layout/Sidebar';
 import { CommandPalette } from '@/components/layout/CommandPalette';
 import { useAuth } from '@/contexts/AuthContext';
@@ -62,15 +57,15 @@ export function Header() {
           {title}
         </h1>
 
-        <div className="hidden items-center gap-2 md:flex">
+        <div className="hidden items-center md:flex">
           <button
             type="button"
             onClick={() => setCommandOpen(true)}
-            className="relative flex h-9 w-56 items-center rounded-lg border border-input bg-transparent px-3 text-sm text-muted-foreground transition-colors hover:bg-accent"
+            className="relative flex h-9 w-56 items-center rounded-lg border border-input bg-muted/40 px-3 text-sm text-muted-foreground transition-colors hover:bg-muted lg:w-64"
           >
             <Search className="mr-2 h-4 w-4 shrink-0" />
             <span className="flex-1 text-left">Search…</span>
-            <kbd className="pointer-events-none hidden rounded border border-border px-1.5 py-0.5 text-[10px] font-medium sm:inline-block">
+            <kbd className="pointer-events-none hidden rounded border border-border bg-background px-1.5 py-0.5 text-[10px] font-medium sm:inline-block">
               ⌘K
             </kbd>
           </button>
@@ -87,22 +82,7 @@ export function Header() {
           <Search className="h-4 w-4" />
         </Button>
 
-        <TooltipProvider delayDuration={200}>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                type="button"
-                variant="ghost"
-                size="icon"
-                disabled
-                aria-label="Notifications"
-              >
-                <Bell className="h-4 w-4" />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>Coming soon</TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
+        <Separator orientation="vertical" className="hidden h-6 md:block" />
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

@@ -26,7 +26,7 @@ export function TodaysMeetings({ items }: { items: NormalizedItem[] }) {
   return (
     <Card>
       <CardHeader className="flex flex-row items-center gap-2 space-y-0">
-        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-500/10 text-blue-600 dark:text-blue-400">
+        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-primary dark:bg-primary/15">
           <Calendar className="h-4 w-4" />
         </div>
         <CardTitle>Today&apos;s Meetings</CardTitle>

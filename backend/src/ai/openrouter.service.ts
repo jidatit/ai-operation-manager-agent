@@ -88,6 +88,10 @@ export async function generateReport(
 
       if (!res.ok) {
         const text = await res.text();
+        logger.error(
+          { status: res.status, body: text.slice(0, 1000), model: config.model },
+          'OpenRouter non-OK response',
+        );
         throw new AppError(502, `OpenRouter error: ${text.slice(0, 200)}`, 'AI_ERROR');
       }
 

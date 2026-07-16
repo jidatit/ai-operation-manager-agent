@@ -149,8 +149,8 @@ If you see `redirect_uri parameter does not match a valid url`, the Asana app is
 
 1. Create a key at [openrouter.ai](https://openrouter.ai/).
 2. Set `OPENROUTER_API_KEY`.
-3. Set `OPENROUTER_MODEL` to a current model slug (default: `anthropic/claude-sonnet-4.5`).  
-   Do **not** use `anthropic/claude-3.5-sonnet` — OpenRouter returns `No endpoints found` for that retired id. Browse models at https://openrouter.ai/models.
+3. Set `OPENROUTER_MODEL` to a current model slug (default: `openai/gpt-4o-mini`).  
+   Browse models at https://openrouter.ai/models. If you see `502` / `AI_ERROR` on generate, check OpenRouter credits and that the model slug is valid.
 
 ### Email (Resend)
 
